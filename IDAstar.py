@@ -37,14 +37,16 @@ def plot_board(state, title, name, n):
 	b = plt.imshow(board, cmap='binary')
 	plt.title(title)
 	plt.savefig("./images/{}.png".format(name))
-	# plt.show()
+
+
+# plt.show()
 
 
 def save_states():
 	global n
 	global path_queue
 	path_length = len(path_queue)
-	for i in range(1, path_length+1):
+	for i in range(1, path_length + 1):
 		state = path_queue.popleft()
 		plot_board(state, "State - {}".format(i), "{}".format(i), n)
 
@@ -86,14 +88,12 @@ def solution(initial_state):
 	possible_next_states.enqueue(initial_state)
 	goal = None
 	while goal == None:
-
 		cutoff = next_cutoff
 		cutoff_values.append(cutoff)
 		# cutoff = cutoff_queue.popleft()
 		# cutoff = int(possible_next_states.dequeue().total_cost)
 
 		goal = IDAstar(initial_state, 0)
-
 
 	return goal
 
@@ -108,7 +108,6 @@ def IDAstar(current_state, counter):
 	max_count = counter
 	global next_cutoff
 	global cutoff
-
 
 	if current_state.total_cost > cutoff:
 		# cutoff_queue.append(current_state.total_cost)
@@ -133,59 +132,4 @@ def generate_initial_state(n):
 	inital_queens = []
 	for i in range(0, n):
 		inital_queens.append(random.randint(0, n - 1))
-
-	# print(inital_queens)
 	return inital_queens
-
-#
-#
-# a = [1, 5, 3, 4, 0]
-# a.sort(key=None, reverse=False)
-# print(a)
-# #
-# n = 4
-# initial_state = State(generate_initial_state(n), 0, 0)
-# possible_next_states.enqueue(initial_state)
-#
-# plot_board(initial_state, "Initial State", "initial_state", n)
-# sol = solution(initial_state)
-# plot_board(sol, "Goal State", "Goal_state", n)
-#
-#
-# # save_states()
-# #
-
-
-#
-
-
-# _______________________________________________________________________________________________
-
-
-# def find_goal(initial_state):
-# 	global queue
-# 	global cutoff
-# 	goal_state = None
-# 	while goal_state == None:
-# 		queue.clear_queue()
-# 		queue.enqueue(State(initial_state, 0, 0))
-# 		current = queue.dequeue()
-# 		if is_goal(current):
-# 			goal_state = current
-# 			break
-# 		while (is_goal(current) == False) & (current.total_cost <= cutoff):
-# 			current.next_states = generate_next_states(current)
-#
-# 			# add_sorted_to_queue(current.next_states)  # no duplication
-#
-# 			try:
-# 				current = queue.dequeue()
-# 			except(Exception):
-# 				print("Empty queue")
-#
-# 		if is_goal(current):
-# 			goal_state = current
-# 			break
-# 		cutoff = current.total_cost
-# 	return goal_state
-#

@@ -1,24 +1,15 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'project.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.2
-#
-# WARNING! All changes made in this file will be lost!
-
 import os
-from PyQt5.QtCore import QEventLoop, QTimer
 from IDAstar import *
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QEventLoop, QTimer
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5 import QtCore, QtGui, QtWidgets
+
 number_of_states = 0
 input_initial_state = []
 n = 4
 initial_state = State(generate_initial_state(n), None, 0)
 plot_board(initial_state, "Initial State", "initial_state", n)
 custom_initial_state_done = False
-
-from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
@@ -33,7 +24,6 @@ class Ui_MainWindow(object):
 		global cutoff_values
 		global number_of_states
 
-
 		msg = QMessageBox()
 		msg.setWindowTitle("Problem Formulation")
 		# msg.setText("Problem Formulation")
@@ -45,13 +35,13 @@ class Ui_MainWindow(object):
 			     "Total path cost  (initial -> goal):  {} steps.\n"
 			     "Number of States (inital -> goal): {} states.\n"
 			     "Sequence of cutoff values for each iteration: {}."
-			     "".format(n,n,initial_state.queens,sol.queens, sol.total_cost,number_of_states,cutoff_values))
+			     "".format(n, n, initial_state.queens, sol.queens, sol.total_cost, number_of_states,
+					 cutoff_values))
 		# msg.setIcon(QMessageBox.Information)
 		msg.setStyleSheet(
 			"QLabel{min-width:1400 px;min-height:700 px; font: 20pt \"Arial Rounded MT Bold\";} QPushButton{ width:250px; font-size: 18px; }");
 
 		x = msg.exec_()
-
 
 	def custom_initial_state(self):
 		self.MainWindow2 = QtWidgets.QMainWindow()
@@ -72,8 +62,7 @@ class Ui_MainWindow(object):
 		self.pushButton_3.setEnabled(True)
 		self.photo.setStyleSheet("border: 3px solid black;")
 		for i in range(0, number_of_states):
-			os.remove("./images/{}.png".format(i+1))
-
+			os.remove("./images/{}.png".format(i + 1))
 
 	def save(self):
 		global number_of_states
@@ -82,7 +71,7 @@ class Ui_MainWindow(object):
 		loop = QEventLoop()
 		QTimer.singleShot(1000, loop.quit)
 		loop.exec_()
-		for i in range(1, number_of_states+1):
+		for i in range(1, number_of_states + 1):
 			self.photo.setPixmap(QtGui.QPixmap("./images/{}.png".format(i)))
 			loop = QEventLoop()
 			QTimer.singleShot(1000, loop.quit)
@@ -125,7 +114,7 @@ class Ui_MainWindow(object):
 		self.photo.setStyleSheet("border: 3px solid red;")
 		number_of_states = len(path_queue)
 		# print(number_of_states)
-		for i in range(1, number_of_states+1):
+		for i in range(1, number_of_states + 1):
 			plot_board(path_queue.pop(), "State - {}".format(i), "{}".format(i), n)
 
 	def setupUi(self, MainWindow):
@@ -242,7 +231,6 @@ class Ui_MainWindow(object):
 		self.pushButton_6.clicked.connect(self.reset)
 		self.pushButton_3.clicked.connect(self.custom_initial_state)
 		self.pushButton_5.clicked.connect(self.information)
-
 
 	def retranslateUi(self, MainWindow):
 		_translate = QtCore.QCoreApplication.translate
