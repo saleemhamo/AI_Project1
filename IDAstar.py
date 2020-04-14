@@ -133,3 +133,4 @@ def generate_initial_state(n):
 	for i in range(0, n):
 		inital_queens.append(random.randint(0, n - 1))
 	return inital_queens
+

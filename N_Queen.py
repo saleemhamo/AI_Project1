@@ -63,7 +63,6 @@ def number_of_conflicts(current_state):
 		else:
 			row = i + current_state[i]
 
-
 		while (n > row) & (row >= 0) & (0 <= col) & (col < n):
 			if row == current_state[i]:
 				row -= 1
@@ -72,8 +71,6 @@ def number_of_conflicts(current_state):
 			board[col][row] += 1
 			row -= 1
 			col += 1
-
-
 
 	return board
 
@@ -98,4 +95,11 @@ def print_board2(board, current_state):
 		# 	print("{:<2}    ".format(board[column][row]), end=" ")
 		print("\n")
 
-
+# n = 4
+# initial_state = [1, 2, 3, 0]
+# board = number_of_conflicts(initial_state)
+#
+# print_board(board, initial_state)
+# print_board2(board, initial_state)
+#
+#
